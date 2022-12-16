@@ -1,5 +1,3 @@
-let immuneRecovered = false;
-
 class Vertex {
     constructor(x, y){
         this.x = x;
@@ -175,4 +173,19 @@ Graph.completeGraph = function(nver){
             G.connect(v, j);
     }
     return G;
+}
+
+Graph.erdosRenyi = function(nver, p){
+	let G = new Graph();
+    for(let i = 0; i < nver; ++i){
+		G.add( Math.random() * 0.9 + 0.05, Math.random() * 0.9 + 0.05 );
+	}
+	for(let i = 0; i < nver; ++i){
+		for(let j = i+1; j < nver; ++j){
+			if(Math.random() > p) continue;
+			G.connect(i, j);
+		}
+	}
+	G.ForcesAlgorithm();
+	return G;
 }

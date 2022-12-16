@@ -1,18 +1,23 @@
 <html>
 <body>
 <script src="./epidemic.js"></script>
+<script src="./graph_plotting.js"></script>
 <canvas id="drawCanvas" width="800" height="800"></canvas><br>
 <button onclick="downloadData()">Download Data</button>
 <div id="dataDiv">
 </div>
 <script>
+let immuneRecovered = false; // SIR (true) or SIS (false)
 let burst = false;
-
 let r = 0.01;
 let niter = 500;
+//let G = Graph.erdosRenyi(200, 0.03);
 let G = Graph.uniformGrid(32);
+//let G = Graph.starGraph(1000);
 //let G = Graph.completeGraph(1000);
-let gamma = 0.05, beta = 0.1;
+let gamma = 0.2, beta = 0.1;
+
+
 function iteration(){
     if(G.t > niter) return false;
     G.simulationStep(gamma, beta);
