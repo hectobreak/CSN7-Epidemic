@@ -1,0 +1,1 @@
+res/set1: gamma=0.2, beta= 0.1

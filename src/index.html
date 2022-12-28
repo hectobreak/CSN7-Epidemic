@@ -1,56 +1,59 @@
 <html>
+
 <body>
-<script src="./epidemic.js"></script>
-<script src="./graph_plotting.js"></script>
-<canvas id="drawCanvas" width="800" height="800"></canvas><br>
-<button onclick="downloadData()">Download Data</button>
-<div id="dataDiv">
-</div>
-<script>
-let immuneRecovered = false; // SIR (true) or SIS (false)
-let burst = false;
-let r = 0.01;
-let niter = 500;
-//let G = Graph.erdosRenyi(200, 0.03);
-//let G = Graph.uniformGrid(32);
-//let G = Graph.starGraph(1000);
-//let G = Graph.completeGraph(200);
-let G = Graph.tree(1000);
-let gamma = 0.2, beta = 0.1;
+	<script src="./require.js"></script>
+	<script src="./epidemic.js"></script>
+	<script src="./graph_plotting.js"></script>
+	<canvas id="drawCanvas" width="800" height="800"></canvas><br>
+	<button onclick="downloadData()">Download Data</button>
+	<div id="dataDiv">
+	</div>
+	<script>
+		let immuneRecovered = false; // SIR (true) or SIS (false)
+		let burst = true;
+		let r = 0.01;
+		let niter = 500;
+		//let G = Graph.erdosRenyi(1000, 0.03);
+		//let G = Graph.uniformGrid(32);
+		//let G = Graph.starGraph(1000);
+		let G = Graph.completeGraph(1000);
+		//let G = Graph.tree(1000);
+		let gamma = 0.2, beta = 0.1;
 
 
-function iteration(){
-    if(G.t > niter) return false;
-    G.simulationStep(gamma, beta);
-    G.draw(drawCanvas, r);
-    let csv = "t,V,I,R\n";
-    for(let i = 0; i < G.stats.V.length; ++i){
-        csv += i + "," + G.stats.V[i] + "," + G.stats.I[i] + "," + G.stats.R[i] + "\n";
-    }
-    dataDiv.innerText = csv;
-}
-G.infectRandom(10);
+		function iteration() {
+			if (G.t > niter) return false;
+			G.simulationStep(gamma, beta);
+			G.draw(drawCanvas, r);
+			let csv = "t,V,I,R\n";
+			for (let i = 0; i < G.stats.V.length; ++i) {
+				csv += i + "," + G.stats.V[i] + "," + G.stats.I[i] + "," + G.stats.R[i] + "\n";
+			}
+			dataDiv.innerText = csv;
+		}
+		G.infectRandom(10);
 
-if(burst){
-    for(let i = 0; i < niter; ++i) G.simulationStep(gamma, beta);
-    G.draw(drawCanvas, r);
-    let csv = "t,V,I,R\n";
-    for(let i = 0; i < G.stats.V.length; ++i){
-        csv += i + "," + G.stats.V[i] + "," + G.stats.I[i] + "," + G.stats.R[i] + "\n";
-    }
-    dataDiv.innerText = csv;
-} else window.setInterval( iteration, 1 );
+		if (burst) {
+			for (let i = 0; i < niter; ++i) G.simulationStep(gamma, beta);
+			G.draw(drawCanvas, r);
+			let csv = "t,V,I,R\n";
+			for (let i = 0; i < G.stats.V.length; ++i) {
+				csv += i + "," + G.stats.V[i] + "," + G.stats.I[i] + "," + G.stats.R[i] + "\n";
+			}
+			dataDiv.innerText = csv;
+		} else window.setInterval(iteration, 1);
 
-function downloadData(){
-    let csv = "t,V,I,R\n";
-    for(let i = 0; i < G.stats.V.length; ++i){
-        csv += i + "," + G.stats.V[i] + "," + G.stats.I[i] + "," + G.stats.R[i] + "\n";
-    }
-    let MIME_TYPE = "text/csv";
-    let blob = new Blob([csv], {type: MIME_TYPE});
-    window.location.href = window.URL.createObjectURL(blob);
-}
-</script>
+		function downloadData() {
+			let csv = "t,V,I,R\n";
+			for (let i = 0; i < G.stats.V.length; ++i) {
+				csv += i + "," + G.stats.V[i] + "," + G.stats.I[i] + "," + G.stats.R[i] + "\n";
+			}
+			let MIME_TYPE = "text/csv";
+			let blob = new Blob([csv], { type: MIME_TYPE });
+			window.location.href = window.URL.createObjectURL(blob);
+		}
+	</script>
 
 </body>
+
 </html>
