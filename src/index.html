@@ -13,11 +13,12 @@
 		let burst = true;
 		let r = 0.01;
 		let niter = 500;
-		//let G = Graph.erdosRenyi(1000, 0.03);
-		//let G = Graph.uniformGrid(32);
-		//let G = Graph.starGraph(1000);
-		let G = Graph.completeGraph(1000);
-		//let G = Graph.tree(1000);
+		let n = 1000;
+		//let G = Graph.erdosRenyi(n, 0.03);
+		let G = Graph.uniformGrid(Math.floor(Math.sqrt(n)));
+		//let G = Graph.starGraph(n);
+		//let G = Graph.completeGraph(n);
+		//let G = Graph.tree(n);
 		let gamma = 0.2, beta = 0.1;
 
 
@@ -31,7 +32,8 @@
 			}
 			dataDiv.innerText = csv;
 		}
-		G.infectRandom(10);
+		//Initial infected population
+		G.infectRandom(n*gamma);
 
 		if (burst) {
 			for (let i = 0; i < niter; ++i) G.simulationStep(gamma, beta);

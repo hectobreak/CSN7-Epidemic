@@ -134,6 +134,12 @@ class Graph {
 			this.vertices[r[i]].selfInfect(this.t);
 		}
 	}
+	//TODO: calculate eigen 
+	// maybe first generate the adj matrix for the graph then get the eigen value?
+	// and for second task run the simulation several time to get the threshold thus to pick gamma and beta?
+	getEigen(){
+
+	}
 }
 
 // Regular lattice network builder
