@@ -1,4 +1,4 @@
-Graph.prototype.ForcesAlgorithm = function(niter = 1000) {
+Graph.prototype.ForcesAlgorithm = function(niter = 500) {
 	let d0 = 0.2;
 	let k = 1, alpha = 2;
 	let dt = 0.05;

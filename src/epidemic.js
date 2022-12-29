@@ -105,7 +105,7 @@ class Graph {
 		vecpush(this.stats, "I", I / this.vertices.length);
 		vecpush(this.stats, "R", R / this.vertices.length);
 	}
-	draw(canvas, rad = 0.025) {
+	draw(canvas, rad = 0.005) {
 		let ctx = canvas.getContext("2d");
 		let w = canvas.width, h = canvas.height;
 		ctx.fillStyle = "#FFFFFF";
@@ -137,8 +137,18 @@ class Graph {
 	//TODO: calculate eigen 
 	// maybe first generate the adj matrix for the graph then get the eigen value?
 	// and for second task run the simulation several time to get the threshold thus to pick gamma and beta?
-	getEigen(){
+	getEigen() {
 
+		var matrix = [];
+		for (var i = 0; i < this.vertices.length; i++) {
+			matrix[i] = [];
+			for (var j = 0; j < this.vertices.length; j++) {
+				if (this.vertices[i].connections.includes(j)) matrix[i][j]=1;
+				else matrix[i][j]=0;
+			}
+		}
+		console.log(matrix)
+		console.log(numeric.eig(matrix))
 	}
 }
 

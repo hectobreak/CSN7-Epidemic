@@ -4,6 +4,7 @@
 	<script src="./require.js"></script>
 	<script src="./epidemic.js"></script>
 	<script src="./graph_plotting.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
 	<canvas id="drawCanvas" width="800" height="800"></canvas><br>
 	<button onclick="downloadData()">Download Data</button>
 	<div id="dataDiv">
@@ -11,11 +12,11 @@
 	<script>
 		let immuneRecovered = false; // SIR (true) or SIS (false)
 		let burst = true;
-		let r = 0.01;
+		let r = 0.005;
 		let niter = 500;
 		let n = 1000;
-		//let G = Graph.erdosRenyi(n, 0.03);
-		let G = Graph.uniformGrid(Math.floor(Math.sqrt(n)));
+		let G = Graph.erdosRenyi(n, 0.03);
+		//let G = Graph.uniformGrid(Math.floor(Math.sqrt(n)));
 		//let G = Graph.starGraph(n);
 		//let G = Graph.completeGraph(n);
 		//let G = Graph.tree(n);
@@ -34,6 +35,8 @@
 		}
 		//Initial infected population
 		G.infectRandom(n*gamma);
+		
+		G.getEigen();
 
 		if (burst) {
 			for (let i = 0; i < niter; ++i) G.simulationStep(gamma, beta);
