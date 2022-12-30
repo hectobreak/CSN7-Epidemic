@@ -138,17 +138,17 @@ class Graph {
 	// maybe first generate the adj matrix for the graph then get the eigen value?
 	// and for second task run the simulation several time to get the threshold thus to pick gamma and beta?
 	getEigen() {
-
-		var matrix = [];
-		for (var i = 0; i < this.vertices.length; i++) {
-			matrix[i] = [];
-			for (var j = 0; j < this.vertices.length; j++) {
-				if (this.vertices[i].connections.includes(j)) matrix[i][j]=1;
-				else matrix[i][j]=0;
+		let matrix = new Array(this.vertices.length);
+		for (let i = 0; i < this.vertices.length; i++) {
+			matrix[i] = new Array(this.vertices.length);
+			for (let j = 0; j < this.vertices.length; j++) {
+				matrix[i][j] = 0;
 			}
+			for(let j of this.vertices[i].connections) matrix[i][j] -= 1;
+			matrix[i][i] = this.vertices[i].connections.length;
 		}
 		console.log(matrix)
-		console.log(numeric.eig(matrix))
+		//console.log(numeric.eig(matrix))
 	}
 }
 

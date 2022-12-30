@@ -17,6 +17,7 @@ plot.csv <- function(path, name){
   #lines(data$R, col="grey")
 }
 
+plot.csv("/data.csv")
 plot.csv("../res/set1/complete.csv","Complete graph with gamma=0.2 & beta=0.1")
 plot.csv("../res/set1/star.csv","Star graph with gamma=0.2 & beta=0.1")
 plot.csv("../res/set1/er.csv","ER graph with gamma=0.2 & beta=0.1")
