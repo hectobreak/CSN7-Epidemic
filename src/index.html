@@ -12,13 +12,13 @@
 	<script>
 		let immuneRecovered = false; // SIR (true) or SIS (false)
 		let burst = false;
-		let r = 0.005;
+		let r = 0.01;
 		let niter = 500;
-		let n = 1000;
+		let n = 32;
 		//let G = Graph.erdosRenyi(n, 0.03);
-		let G = Graph.uniformGrid(Math.floor(Math.sqrt(n)));
+		//let G = Graph.uniformGrid(Math.floor(Math.sqrt(n)));
 		//let G = Graph.starGraph(n);
-		//let G = Graph.completeGraph(n);
+		let G = Graph.completeGraph(n);
 		//let G = Graph.tree(n);
 		let gamma = 0.1, beta = 0.2;
 
