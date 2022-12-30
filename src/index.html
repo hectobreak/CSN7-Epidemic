@@ -1,10 +1,8 @@
 <html>
 
 <body>
-	<script src="./require.js"></script>
 	<script src="./epidemic.js"></script>
 	<script src="./graph_plotting.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
 	<canvas id="drawCanvas" width="800" height="800"></canvas><br>
 	<button onclick="downloadData()">Download Data</button>
 	<div id="dataDiv">
@@ -36,7 +34,7 @@
 		//Initial infected population
 		G.infectRandom(n*gamma);
 		
-		G.getEigen();
+		//G.getEigen();
 
 		if (burst) {
 			for (let i = 0; i < niter; ++i) G.simulationStep(gamma, beta);
